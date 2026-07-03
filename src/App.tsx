@@ -128,28 +128,16 @@ export default function App() {
                 imageAlt={poke.name}
                 actions={
                   <div style={{ display: 'flex', gap: '0.5rem', width: '100%', flexDirection: 'column' }}>
-                    <Tooltip content={`Tem 70% de chance de capturar o ${formattedName}!`} direction="top" color="dark">
-                      <span style={{ display: 'block', width: '100%' }}>
-                        <Button variant="primary" size="medium" roundness="round" fullWidth onClick={() => handleCapture(formattedName)}>
-                          Capturar
-                        </Button>
-                      </span>
-                    </Tooltip>
+                    <Button variant="primary" size="medium" roundness="round" fullWidth onClick={() => handleCapture(formattedName)}>
+                      Capturar
+                    </Button>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <Tooltip content={`Ver atributos detalhados de ${formattedName}`} direction="bottom" color="light">
-                        <span style={{ display: 'inline-flex', flex: 1 }}>
-                          <Button variant="outline" size="small" fullWidth onClick={() => handleDetails(formattedName)}>
-                            Detalhes
-                          </Button>
-                        </span>
-                      </Tooltip>
-                      <Tooltip content="Soltar Pokémon" direction="bottom" color="dark">
-                        <span style={{ display: 'inline-flex' }}>
-                          <ButtonIcon aria-label="Soltar" variant="ghost" color="destructive" size="small" onClick={() => handleRelease(formattedName)}>
-                            <span aria-hidden="true" style={{ fontSize: '1rem' }}>🗑️</span>
-                          </ButtonIcon>
-                        </span>
-                      </Tooltip>
+                      <Button variant="outline" size="small" fullWidth onClick={() => handleDetails(formattedName)}>
+                        Detalhes
+                      </Button>
+                      <ButtonIcon aria-label="Soltar" variant="ghost" color="destructive" size="small" onClick={() => handleRelease(formattedName)}>
+                        <span aria-hidden="true" style={{ fontSize: '1rem' }}>🗑️</span>
+                      </ButtonIcon>
                     </div>
                   </div>
                 }
