@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Card, Button, Badge, Spinner, Avatar, Tooltip } from '@poliedro/tamentai/web';
+import { Card, Button, Badge, Spinner, Avatar, Tooltip, Progress, ButtonIcon } from '@poliedro/tamentai/web';
+import { useGlobalToast } from './contexts/ToastContext';
 
 interface Pokemon {
   id: number;
   name: string;
+  base_experience: number;
   sprites: {
     front_default: string;
   };
@@ -17,6 +19,7 @@ interface Pokemon {
 export default function App() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
+  const { showToast } = useGlobalToast();
 
   useEffect(() => {
     async function fetchPokemons() {
@@ -41,88 +44,160 @@ export default function App() {
     fetchPokemons();
   }, []);
 
+  const handleCapture = (name: string) => {
+    const success = Math.random() > 0.3; // 70% de chance de capturar
+    if (success) {
+      showToast({
+        title: 'Sucesso!',
+        description: `${name} foi capturado com sucesso!`,
+        type: 'success',
+        duration: 3000
+      });
+    } else {
+      showToast({
+        title: 'Oh não!',
+        description: `O ${name} escapou da Pokébola!`,
+        type: 'error',
+        duration: 4000
+      });
+    }
+  };
+
+  const handleDetails = (name: string) => {
+    showToast({
+      title: 'Informação',
+      description: `Buscando mais dados sobre ${name}...`,
+      type: 'info',
+      duration: 2500
+    });
+  };
+
+  const handleRelease = (name: string) => {
+    showToast({
+      title: 'Atenção',
+      description: `${name} foi solto na natureza permanentemente.`,
+      type: 'warning',
+      duration: 3500
+    });
+  };
+
   return (
-    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto', fontFamily: 'sans-serif' }}>
+    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem', fontWeight: 600 }}>Tamentai Playground - Componentes v2</h1>
-        <p style={{ color: '#555', margin: 0 }}>Testando componentes como Card, Button, Badge, Avatar e Spinner usando a PokeAPI.</p>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', fontWeight: 500, letterSpacing: '1px' }}>Tamentai Playground</h1>
+        <p style={{ color: '#555', margin: 0 }}>Testando mais componentes: Avatar, Badge, Button, ButtonIcon, Card, Progress, Toast e Tooltip.</p>
       </div>
-      
+
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '3rem' }}>
-          <Spinner size='lg' />
+          <Spinner />
         </div>
       ) : (
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
             gap: '1.5rem',
           }}
         >
-          {pokemons.map((poke) => (
-            <Card
-              key={poke.id}
-              heading={
-                <span style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <Avatar 
-                    type="Image" 
-                    showPicture={true} 
-                    imageSrc={poke.sprites.front_default} 
-                    imageAlt={poke.name} 
-                    size="Default" 
-                    shape="Circular" 
-                  />
-                  <span>{poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}</span>
-                </span>
-              }
-              subtitle={`#${poke.id.toString().padStart(3, '0')}`}
-              imageSrc={poke.sprites.front_default}
-              imageAlt={poke.name}
-              actions={
-                <div style={{ display: 'flex', gap: '0.5rem', width: '100%', flexDirection: 'column' }}>
-                  <Button variant="primary" size="medium" roundness="round" fullWidth>
-                    Capturar
-                  </Button>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <Button variant="outline" size="small" fullWidth>
-                      Ver Detalhes
-                    </Button>
-                    <Button variant="ghost" size="small" fullWidth>
-                      Soltar
-                    </Button>
-                  </div>
-                </div>
-              }
-            >
-              <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-                {poke.types.map((t) => {
-                  let color: 'dark' | 'gray' | 'green' | 'blue' | 'red' | 'yellow' | 'light' = 'gray';
-                  const typeName = t.type.name;
-                  if (['grass', 'bug'].includes(typeName)) color = 'green';
-                  if (['fire', 'fighting', 'dragon'].includes(typeName)) color = 'red';
-                  if (['water', 'ice'].includes(typeName)) color = 'blue';
-                  if (['electric'].includes(typeName)) color = 'yellow';
-                  if (['poison', 'ghost', 'dark'].includes(typeName)) color = 'dark';
-
-                  return (
-                    <Tooltip 
-                      key={t.type.name} 
-                      content={`Tipo elemental: ${typeName}`} 
-                      direction="up" 
-                      color="dark"
-                    >
+          {pokemons.map((poke) => {
+            const formattedName = poke.name.charAt(0).toUpperCase() + poke.name.slice(1);
+            
+            return (
+              <Card
+                key={poke.id}
+                heading={
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <Tooltip content={`ID na Pokédex: #${poke.id}`} direction="right" color="light">
                       <span style={{ display: 'inline-flex' }}>
-                        <Badge type="soft" color={color} shape="pilled">
-                          {typeName}
-                        </Badge>
+                        <Avatar 
+                          type="Image" 
+                          showPicture={true} 
+                          imageSrc={poke.sprites.front_default} 
+                          imageAlt={poke.name} 
+                          size="Default" 
+                          shape="Circular" 
+                        />
                       </span>
                     </Tooltip>
-                  )
-                })}
-              </div>
-            </Card>
-          ))}
+                    <span>{formattedName}</span>
+                  </span>
+                }
+                subtitle={`#${poke.id.toString().padStart(3, '0')}`}
+                imageSrc={poke.sprites.front_default}
+                imageAlt={poke.name}
+                actions={
+                  <div style={{ display: 'flex', gap: '0.5rem', width: '100%', flexDirection: 'column' }}>
+                    <Tooltip content={`Tem 70% de chance de capturar o ${formattedName}!`} direction="top" color="dark">
+                      <span style={{ display: 'block', width: '100%' }}>
+                        <Button variant="primary" size="medium" roundness="round" fullWidth onClick={() => handleCapture(formattedName)}>
+                          Capturar
+                        </Button>
+                      </span>
+                    </Tooltip>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <Tooltip content={`Ver atributos detalhados de ${formattedName}`} direction="bottom" color="light">
+                        <span style={{ display: 'inline-flex', flex: 1 }}>
+                          <Button variant="outline" size="small" fullWidth onClick={() => handleDetails(formattedName)}>
+                            Detalhes
+                          </Button>
+                        </span>
+                      </Tooltip>
+                      <Tooltip content="Soltar Pokémon" direction="bottom" color="dark">
+                        <span style={{ display: 'inline-flex' }}>
+                          <ButtonIcon aria-label="Soltar" variant="ghost" color="destructive" size="small" onClick={() => handleRelease(formattedName)}>
+                            <span aria-hidden="true" style={{ fontSize: '1rem' }}>🗑️</span>
+                          </ButtonIcon>
+                        </span>
+                      </Tooltip>
+                    </div>
+                  </div>
+                }
+              >
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    {poke.types.map((t) => {
+                      let color: 'dark' | 'gray' | 'green' | 'blue' | 'red' | 'yellow' | 'light' = 'gray';
+                      const typeName = t.type.name;
+                      if (['grass', 'bug'].includes(typeName)) color = 'green';
+                      if (['fire', 'fighting', 'dragon'].includes(typeName)) color = 'red';
+                      if (['water', 'ice'].includes(typeName)) color = 'blue';
+                      if (['electric'].includes(typeName)) color = 'yellow';
+                      if (['poison', 'ghost', 'dark'].includes(typeName)) color = 'dark';
+
+                      return (
+                        <Tooltip 
+                          key={t.type.name} 
+                          content={`Tipo elemental: ${typeName}`} 
+                          direction="up" 
+                          color="dark"
+                        >
+                          <span style={{ display: 'inline-flex' }}>
+                            <Badge type="soft" color={color} shape="pilled">
+                              {typeName}
+                            </Badge>
+                          </span>
+                        </Tooltip>
+                      )
+                    })}
+                  </div>
+                  
+                  <div style={{ marginTop: '0.5rem' }}>
+                    <Tooltip content={`Experiência base ao derrotar um ${formattedName} selvagem`} direction="bottom" color="dark">
+                      <span style={{ display: 'block' }}>
+                        <Progress 
+                          value={(poke.base_experience / 300) * 100} 
+                          variant="titleLabel" 
+                          label={`Base XP: ${poke.base_experience}`} 
+                          size="sm" 
+                        />
+                      </span>
+                    </Tooltip>
+                  </div>
+                </div>
+              </Card>
+            )
+          })}
         </div>
       )}
     </div>

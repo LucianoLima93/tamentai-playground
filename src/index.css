@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Geist Pixel';
+  src: url('../node_modules/geist/dist/fonts/geist-pixel/GeistPixel-Square.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Geist Pixel', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

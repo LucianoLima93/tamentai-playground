@@ -7,10 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tamentai:local": "pnpm link ../tamentai",
+    "tamentai:remote": "pnpm unlink @poliedro/tamentai && pnpm install --force"
   },
   "dependencies": {
     "@poliedro/tamentai": "1.0.0-beta.5",
+    "geist": "^1.7.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
