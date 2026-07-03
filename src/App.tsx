@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card, Button, Badge, Spinner, Avatar, Tooltip, Progress, ButtonIcon } from '@poliedro/tamentai/web';
 import { useGlobalToast } from './contexts/ToastContext';
+import { Trash } from 'lucide-react';
 
 interface Pokemon {
   id: number;
@@ -136,7 +137,7 @@ export default function App() {
                         Detalhes
                       </Button>
                       <ButtonIcon aria-label="Soltar" variant="ghost" color="destructive" size="small" onClick={() => handleRelease(formattedName)}>
-                        <span aria-hidden="true" style={{ fontSize: '1rem' }}>🗑️</span>
+                        <Trash size={16} aria-hidden="true" />
                       </ButtonIcon>
                     </div>
                   </div>
