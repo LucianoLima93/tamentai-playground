@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 // removed design tokens
 
 // Imports diretos dos componentes-v2
@@ -115,7 +115,7 @@ function CardListExample() {
 
 function ShowcaseContent() {
 	const { addToast } = useToast()
-	const [progress, setProgress] = useState(45)
+	// const [progress, setProgress] = useState(45)
 
 	const handleShowToast = (variant: 'success' | 'error' | 'info' | 'warning' | 'neutral') => {
 		const messages = {

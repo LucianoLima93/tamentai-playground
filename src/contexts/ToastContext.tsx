@@ -34,7 +34,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           onOpenChange={setOpen}
           title={params.title}
           description={params.description}
-          type={params.type || 'info'}
+          variant={params.type || 'info'}
           duration={params.duration || 3000}
         />
       )}

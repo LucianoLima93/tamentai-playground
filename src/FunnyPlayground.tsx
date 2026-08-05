@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Select } from '@poliedro/tamentai/web'
 import { Combobox } from '@poliedro/tamentai/web'
 import { Card } from '@poliedro/tamentai/web'
