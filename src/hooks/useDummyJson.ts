@@ -51,14 +51,39 @@ async function fetchCategories(): Promise<Category[]> {
   return response.json();
 }
 
-async function searchProducts(query: string, limit = 12): Promise<ProductsResponse> {
+async function searchProducts(query: string, limit = 12, skip = 0, sortBy?: string, order?: 'asc' | 'desc'): Promise<ProductsResponse> {
   const searchParams = new URLSearchParams();
   searchParams.set('q', query);
   searchParams.set('limit', String(limit));
+  searchParams.set('skip', String(skip));
+  if (sortBy) searchParams.set('sortBy', sortBy);
+  if (order) searchParams.set('order', order);
 
   const response = await fetch(`${BASE_URL}/products/search?${searchParams.toString()}`);
   if (!response.ok) {
     throw new Error(`Failed to search products: ${response.status}`);
+  }
+  return response.json();
+}
+
+export type ProductUpdate = Partial<Pick<Product, 'title' | 'price' | 'stock' | 'brand'>>;
+
+async function updateProduct(id: number, changes: ProductUpdate): Promise<Product> {
+  const response = await fetch(`${BASE_URL}/products/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(changes),
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to update product ${id}: ${response.status}`);
+  }
+  return response.json();
+}
+
+async function deleteProduct(id: number): Promise<Product> {
+  const response = await fetch(`${BASE_URL}/products/${id}`, { method: 'DELETE' });
+  if (!response.ok) {
+    throw new Error(`Failed to delete product ${id}: ${response.status}`);
   }
   return response.json();
 }
@@ -191,4 +216,4 @@ export function useProductSearch() {
 }
 
 // Export raw fetch functions for use outside of React components
-export { fetchProducts, fetchProduct, fetchCategories, searchProducts };
+export { fetchProducts, fetchProduct, fetchCategories, searchProducts, updateProduct, deleteProduct };

@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { Button, Text, TitleV2 } from '@poliedro/tamentai/web'
-import { ShoppingBag } from 'lucide-react'
+import { Button, Icon, Text, TitleV2 } from '@poliedro/tamentai/web'
 import { useCart } from '../../contexts/CartContext'
 import { useGlobalToast } from '../../contexts/ToastContext'
 import { CartItem } from '../../components/Shop/CartItem'
@@ -31,7 +30,8 @@ function CartPage() {
         gap: '1rem',
         padding: '2rem',
       }}>
-        <ShoppingBag size={48} color="var(--color-muted, #999)" />
+        {/* <ShoppingBag size={48} color="var(--color-muted, #999)" /> */}
+        <Icon name='ShoppingBag' size={32} stroke="var(--color-muted, #999)" />
         <TitleV2 variant="h4" weight="semibold">
           Seu carrinho está vazio
         </TitleV2>

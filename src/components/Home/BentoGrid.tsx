@@ -11,8 +11,8 @@ import {
   Spinner,
   Switch,
   Tooltip,
+  Icon,
 } from '@poliedro/tamentai/web'
-import { Heart, Star, Download, Search, Bell, Mail } from 'lucide-react'
 import styles from './BentoGrid.module.css'
 
 function UserCardBlock() {
@@ -93,13 +93,13 @@ function ButtonsBlock() {
         <Button variant="ghost" size="md" roundness="round" fullWidth>Ghost</Button>
         <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
           <ButtonIcon aria-label="Favoritar" variant="solid" size="sm">
-            <Heart size={14} />
+            <Icon name='Heart' size={16} />
           </ButtonIcon>
           <ButtonIcon aria-label="Estrela" variant="outline" size="sm">
-            <Star size={14} />
+            <Icon name='Star' size={16} />
           </ButtonIcon>
           <ButtonIcon aria-label="Download" variant="ghost" size="sm">
-            <Download size={14} />
+            <Icon name='Download' size={16} />
           </ButtonIcon>
         </div>
       </div>
@@ -114,11 +114,11 @@ function FormBlock() {
       <div className={styles.cellContent} style={{ gap: '1rem' }}>
         <Input
           placeholder="Buscar componentes..."
-          startIcon={<Search size={16} />}
+          startIcon={<Icon name='Search' size={16} /> }
         />
         <Input
           placeholder="seu@email.com"
-          startIcon={<Mail size={16} />}
+          startIcon={<Icon name='Mail' size={16} />}
         />
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <Checkbox label="Aceito os termos" />
@@ -177,7 +177,7 @@ function SpinnerBlock() {
           Salvando...
         </Button>
         <ButtonIcon aria-label="Notificações" variant="outline" size="md" loading>
-          <Bell size={16} />
+          <Icon name='Bell' size={16} />
         </ButtonIcon>
       </div>
     </div>

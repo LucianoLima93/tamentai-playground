@@ -3,7 +3,7 @@ import React from 'react';
 import { LegacyAppPlayground } from '../../LegacyAppPlayground';
 import { FunnyPlayground } from '../../FunnyPlayground';
 import PokemonPlayground from '../../PokemonPlayground';
-import { TablePlayground } from '../../TablePlayground';
+import TablePlayground from '../../TablePlayground';
 
 export function PlaygroundTabs() {
   const [activeTab, setActiveTab] = React.useState<'pokemon' | 'legacy' | 'funny' | 'table'>('pokemon')

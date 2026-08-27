@@ -1,6 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { Badge, Button, ButtonIcon, Tooltip } from '@poliedro/tamentai/web'
-import { Heart, Star } from 'lucide-react'
+import { Badge, Button, ButtonIcon, Tooltip, Icon } from '@poliedro/tamentai/web'
 import type { Product } from '../../types/product'
 import { useCart } from '../../contexts/CartContext'
 import { useWishlist } from '../../contexts/WishlistContext'
@@ -51,10 +50,10 @@ export function ProductCard({ product }: Readonly<ProductCardProps>) {
           <ButtonIcon
             aria-label={wishlisted ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
             variant="ghost"
-            size="sm"
+            size="xs"
             onClick={handleToggleWishlist}
           >
-            <Heart size={16} fill={wishlisted ? '#ef4444' : 'transparent'} color={wishlisted ? '#ef4444' : 'currentColor'} aria-hidden="true" />
+            <Icon name='Heart' size={20} fill={wishlisted ? '#ef4444' : 'transparent'} color={wishlisted ? 'destructive' : 'currentColor'} aria-hidden="true" />
           </ButtonIcon>
         </div>
         <div className={styles.addOverlay}>
@@ -85,9 +84,8 @@ export function ProductCard({ product }: Readonly<ProductCardProps>) {
             <span className={styles.price}>${product.price.toFixed(2)}</span>
           )}
         </div>
-
         <div className={styles.ratingRow}>
-          <Star size={12} fill="#f59e0b" className={styles.ratingIcon} />
+          <Icon name='Star' fill="#f59e0b" stroke='#f59e0b' className={styles.ratingIcon} color='currentColor'/>
           <span className={styles.ratingText}>{product.rating.toFixed(1)}</span>
         </div>
       </div>

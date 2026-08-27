@@ -1,5 +1,4 @@
-import { Avatar, Badge, Card, Progress, Text, TitleV2 } from '@poliedro/tamentai/web'
-import { Star } from 'lucide-react'
+import { Avatar, Badge, Card, Icon, Progress, Text, TitleV2 } from '@poliedro/tamentai/web'
 import type { ProductReview } from '../../types/product'
 
 interface ReviewSectionProps {
@@ -47,7 +46,7 @@ export function ReviewSection({ reviews, averageRating }: Readonly<ReviewSection
           <TitleV2 variant="h1" weight="bold">{averageRating.toFixed(1)}</TitleV2>
           <div style={{ display: 'flex', gap: '2px', justifyContent: 'center', marginTop: '0.5rem' }}>
             {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} size={14} fill={i < Math.round(averageRating) ? '#f59e0b' : 'transparent'} color="#f59e0b" />
+              <Icon name='Star' size={16} fill={i < Math.round(averageRating) ? '#f59e0b' : 'transparent'} stroke="#f59e0b" />
             ))}
           </div>
           <Text variant="caption" color="muted">

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as TableRouteImport } from './routes/table'
 import { Route as ShopIndexRouteImport } from './routes/shop/index'
 import { Route as ShopCartRouteImport } from './routes/shop/cart'
 import { Route as ShopProductProductIdRouteImport } from './routes/shop/product.$productId'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TableRoute = TableRouteImport.update({
+  id: '/table',
+  path: '/table',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopIndexRoute = ShopIndexRouteImport.update({
@@ -44,12 +50,14 @@ const ShopProductProductIdRoute = ShopProductProductIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/shop': typeof ShopRouteWithChildren
+  '/table': typeof TableRoute
   '/shop/cart': typeof ShopCartRoute
   '/shop/': typeof ShopIndexRoute
   '/shop/product/$productId': typeof ShopProductProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/table': typeof TableRoute
   '/shop/cart': typeof ShopCartRoute
   '/shop': typeof ShopIndexRoute
   '/shop/product/$productId': typeof ShopProductProductIdRoute
@@ -58,6 +66,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/shop': typeof ShopRouteWithChildren
+  '/table': typeof TableRoute
   '/shop/cart': typeof ShopCartRoute
   '/shop/': typeof ShopIndexRoute
   '/shop/product/$productId': typeof ShopProductProductIdRoute
@@ -65,13 +74,19 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/shop' | '/shop/cart' | '/shop/' | '/shop/product/$productId'
+    | '/'
+    | '/shop'
+    | '/table'
+    | '/shop/cart'
+    | '/shop/'
+    | '/shop/product/$productId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/shop/cart' | '/shop' | '/shop/product/$productId'
+  to: '/' | '/table' | '/shop/cart' | '/shop' | '/shop/product/$productId'
   id:
     | '__root__'
     | '/'
     | '/shop'
+    | '/table'
     | '/shop/cart'
     | '/shop/'
     | '/shop/product/$productId'
@@ -80,6 +95,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ShopRoute: typeof ShopRouteWithChildren
+  TableRoute: typeof TableRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -96,6 +112,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/table': {
+      id: '/table'
+      path: '/table'
+      fullPath: '/table'
+      preLoaderRoute: typeof TableRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop/': {
@@ -139,6 +162,7 @@ const ShopRouteWithChildren = ShopRoute._addFileChildren(ShopRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ShopRoute: ShopRouteWithChildren,
+  TableRoute: TableRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

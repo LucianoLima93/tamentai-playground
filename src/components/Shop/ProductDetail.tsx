@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { Badge, Breadcrumb, Button, ButtonIcon, Text, TitleV2, Tooltip } from '@poliedro/tamentai/web'
-import { Star, Minus, Plus, Heart } from 'lucide-react'
+import { Badge, Breadcrumb, Button, ButtonIcon, Icon, Text, TitleV2, Tooltip } from '@poliedro/tamentai/web'
 import type { Product } from '../../types/product'
 import { useCart } from '../../contexts/CartContext'
 import { useWishlist } from '../../contexts/WishlistContext'
@@ -100,12 +99,7 @@ export function ProductDetail({ product }: Readonly<ProductDetailProps>) {
 
         <div className={styles.ratingRow}>
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              size={16}
-              fill={i < Math.round(product.rating) ? '#f59e0b' : 'transparent'}
-              className={styles.starIcon}
-            />
+            <Icon name='Star' size={16} fill={i < Math.round(product.rating) ? '#f59e0b' : 'transparent'} stroke='#f59e0b' className={styles.starIcon} />
           ))}
           <Text variant="body-sm" color="muted">
             {product.rating.toFixed(1)} ({product.reviews.length} reviews)
@@ -150,19 +144,17 @@ export function ProductDetail({ product }: Readonly<ProductDetailProps>) {
               aria-label="Diminuir quantidade"
               variant="outline"
               size="sm"
+              icon='Minus'
               onClick={() => setQuantity(q => Math.max(1, q - 1))}
-            >
-              <Minus size={14} aria-hidden="true" />
-            </ButtonIcon>
+            />
             <Text weight="semibold">{quantity}</Text>
             <ButtonIcon
               aria-label="Aumentar quantidade"
               variant="outline"
               size="sm"
+              icon='Plus'
               onClick={() => setQuantity(q => q + 1)}
-            >
-              <Plus size={14} aria-hidden="true" />
-            </ButtonIcon>
+            />
           </div>
 
           <div style={{ display: 'flex', gap: '0.75rem' }}>
@@ -171,11 +163,12 @@ export function ProductDetail({ product }: Readonly<ProductDetailProps>) {
             </Button>
             <ButtonIcon
               aria-label={wishlisted ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
-              variant="outline"
+              variant="ghost"
               size="lg"
+              color={wishlisted ? 'destructive' : 'primary'}
               onClick={handleToggleWishlist}
             >
-              <Heart size={20} fill={wishlisted ? '#ef4444' : 'transparent'} color={wishlisted ? '#ef4444' : 'currentColor'} aria-hidden="true" />
+              <Icon name='Heart' size={24} fill={wishlisted ? '#ef4444' : 'transparent'} color={wishlisted ? 'destructive' : 'currentColor'} aria-hidden="true" />
             </ButtonIcon>
           </div>
         </div>
