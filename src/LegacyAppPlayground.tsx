@@ -15,6 +15,7 @@ import { Avatar, AvatarGroup } from '@poliedro/tamentai/web'
 import { Checkbox } from '@poliedro/tamentai/web'
 import { Input } from '@poliedro/tamentai/web'
 import { Icon } from '@poliedro/tamentai/web'
+import { InputGroup } from '@poliedro/tamentai/web'
 
 import avatarExample1 from './assets/images/avatar-example-1.png'
 import avatarExample2 from './assets/images/avatar-example-2.png'
@@ -669,6 +670,117 @@ function ShowcaseContent() {
 									/>
 								</div>
 							</CardContent>
+						</Card>
+					</div>
+				</section>
+
+				{/* ROW 5: Input Group */}
+				<section>
+					<h2 style={{ fontSize: '1.5rem', color: '#374151', marginBottom: '1.5rem' }}>Input Group (Composição de Inputs)</h2>
+					<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '2rem' }}>
+						<Card heading="Horizontal — Gaps" subtitle="InputGroup horizontal com diferentes espaçamentos (none, sm, md, lg).">
+							<div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '1.5rem' }}>
+								<div>
+									<h4 style={{ marginBottom: '0.5rem', fontSize: '14px', fontWeight: 600 }}>Gap: none</h4>
+									<InputGroup width="100%" layout="horizontal" gap="none">
+										<Input rounded="start" variant="bordered" placeholder="Name" startIcon={<Icon name="User" />} startDivider startBackgroundColor />
+										<Input rounded="none" variant="bordered" placeholder="Last Name" />
+										<Input rounded="end" variant="bordered" placeholder="Mail" startIcon={<Icon name="Mail" />} startDivider startBackgroundColor />
+									</InputGroup>
+								</div>
+								<div>
+									<h4 style={{ marginBottom: '0.5rem', fontSize: '14px', fontWeight: 600 }}>Gap: sm</h4>
+									<InputGroup width="100%" layout="horizontal" gap="sm">
+										<Input rounded="start" variant="bordered" placeholder="Name" startIcon={<Icon name="User" />} startDivider startBackgroundColor />
+										<Input rounded="none" variant="bordered" placeholder="Last Name" />
+										<Input rounded="end" variant="bordered" placeholder="Mail" startIcon={<Icon name="Mail" />} startDivider startBackgroundColor />
+									</InputGroup>
+								</div>
+								<div>
+									<h4 style={{ marginBottom: '0.5rem', fontSize: '14px', fontWeight: 600 }}>Gap: md</h4>
+									<InputGroup width="100%" layout="horizontal" gap="md">
+										<Input rounded="start" variant="bordered" placeholder="Name" startIcon={<Icon name="User" />} startDivider startBackgroundColor />
+										<Input rounded="none" variant="bordered" placeholder="Last Name" />
+										<Input rounded="end" variant="bordered" placeholder="Mail" startIcon={<Icon name="Mail" />} startDivider startBackgroundColor />
+									</InputGroup>
+								</div>
+								<div>
+									<h4 style={{ marginBottom: '0.5rem', fontSize: '14px', fontWeight: 600 }}>Gap: lg</h4>
+									<InputGroup width="100%" layout="horizontal" gap="lg">
+										<Input rounded="start" variant="bordered" placeholder="Name" startIcon={<Icon name="User" />} startDivider startBackgroundColor />
+										<Input rounded="none" variant="bordered" placeholder="Last Name" />
+										<Input rounded="end" variant="bordered" placeholder="Mail" startIcon={<Icon name="Mail" />} startDivider startBackgroundColor />
+									</InputGroup>
+								</div>
+							</div>
+						</Card>
+
+						<Card heading="Horizontal — Feedback" subtitle="InputGroup com mensagem de erro.">
+							<div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '1.5rem' }}>
+								<InputGroup width="100%" layout="horizontal" gap="sm" feedbackType="error" feedbackMessage="This is an error message with a long text to test the feedback message">
+									<Input rounded="start" variant="bordered" placeholder="Name" startIcon={<Icon name="User" />} startDivider startBackgroundColor />
+									<Input rounded="none" variant="bordered" placeholder="Last Name" invalid />
+									<Input rounded="end" variant="bordered" placeholder="Mail" startIcon={<Icon name="Mail" />} startDivider startBackgroundColor />
+								</InputGroup>
+							</div>
+						</Card>
+
+						<Card heading="Horizontal — Com Botões" subtitle="InputGroup composto com Button.">
+							<div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '1.5rem' }}>
+								<InputGroup width="100%" layout="horizontal" gap="none">
+									<div style={{ width: '150px' }}>
+										<Button rounded="start" leftIcon={<Icon name="Search" />} variant="solid" size="md" fullWidth>Search</Button>
+									</div>
+									<Input rounded="none" variant="bordered" placeholder="Full Name" />
+									<div style={{ width: '150px' }}>
+										<Button rounded="none" leftIcon={<Icon name="Trash" />} variant="solid" color="destructive" size="md" fullWidth>Delete</Button>
+									</div>
+									<div style={{ width: '150px' }}>
+										<Button rounded="end" leftIcon={<Icon name="Check" />} variant="solid" color="primary" size="md" fullWidth>Confirm</Button>
+									</div>
+								</InputGroup>
+							</div>
+						</Card>
+
+						<Card heading="Vertical — Gaps" subtitle="InputGroup vertical com diferentes espaçamentos.">
+							<div style={{ display: 'flex', flexDirection: 'row', gap: '1.5rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
+								<InputGroup width="100%" layout="vertical" gap="none">
+									<Input rounded="top" variant="bordered" placeholder="Website" startIcon="http://" startDivider startBackgroundColor />
+									<Input rounded="none" variant="bordered" placeholder="Mail" startIcon={<Icon name="Mail" />} startDivider startBackgroundColor />
+									<Input rounded="bottom" variant="bordered" placeholder="Search" endIcon={<Icon name="Search" />} endDivider endBackgroundColor />
+								</InputGroup>
+								<InputGroup width="100%" layout="vertical" gap="sm">
+									<Input rounded="top" variant="bordered" placeholder="Website" startIcon="http://" startDivider startBackgroundColor />
+									<Input rounded="none" variant="bordered" placeholder="Mail" startIcon={<Icon name="Mail" />} startDivider startBackgroundColor />
+									<Input rounded="bottom" variant="bordered" placeholder="Search" endIcon={<Icon name="Search" />} endDivider endBackgroundColor />
+								</InputGroup>
+							</div>
+						</Card>
+
+						<Card heading="Vertical — Feedback" subtitle="InputGroup vertical com mensagem de erro.">
+							<div style={{ display: 'flex', flexDirection: 'row', gap: '1.5rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
+								<InputGroup width="100%" layout="vertical" gap="sm">
+									<Input rounded="top" variant="bordered" placeholder="Website" startIcon="http://" startDivider startBackgroundColor />
+									<Input rounded="none" variant="bordered" placeholder="Mail" startIcon={<Icon name="Mail" />} startDivider startBackgroundColor />
+									<Input rounded="bottom" variant="bordered" placeholder="Search" endIcon={<Icon name="Search" />} endDivider endBackgroundColor />
+								</InputGroup>
+								<InputGroup width="100%" layout="vertical" gap="md" feedbackType="error" feedbackMessage="This is an error message with a long text to test the feedback message">
+									<Input rounded="top" variant="bordered" placeholder="Website" startIcon="http://" startDivider startBackgroundColor />
+									<Input rounded="none" variant="bordered" placeholder="Mail" startIcon={<Icon name="Mail" />} startDivider startBackgroundColor invalid />
+									<Input rounded="bottom" variant="bordered" placeholder="Search" endIcon={<Icon name="Search" />} endDivider endBackgroundColor />
+								</InputGroup>
+							</div>
+						</Card>
+
+						<Card heading="Vertical — Com Botões" subtitle="InputGroup vertical composto com Button.">
+							<div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '1.5rem' }}>
+								<InputGroup width="250px" layout="vertical" gap="none">
+									<Button rounded="top" leftIcon={<Icon name="Search" />} variant="solid" size="md" fullWidth>Search</Button>
+									<Input rounded="none" variant="bordered" placeholder="Full Name" />
+									<Button rounded="none" leftIcon={<Icon name="Trash" />} variant="solid" color="destructive" size="md" fullWidth>Delete</Button>
+									<Button rounded="bottom" leftIcon={<Icon name="Check" />} variant="solid" color="primary" size="md" fullWidth>Confirm</Button>
+								</InputGroup>
+							</div>
 						</Card>
 					</div>
 				</section>

@@ -1,4 +1,10 @@
 allowBuilds:
   - sharp
+minimumReleaseAge: 0
 minimumReleaseAgeExclude:
   - '@poliedro/tamentai@1.0.0-beta.9'
+  - '@poliedro/tamentai@1.0.0-beta.10'
+  - '@tanstack/react-router@1.170.27'
+  - '@tanstack/router-core@1.171.22'
+  - '@tanstack/router-generator@1.167.28'
+  - '@tanstack/router-plugin@1.168.30'

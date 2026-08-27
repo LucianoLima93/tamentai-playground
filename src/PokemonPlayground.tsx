@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Card, Button, Badge, Spinner, Avatar, Tooltip, Progress, ButtonIcon } from '@poliedro/tamentai/web';
+import { Card, Button, Badge, Spinner, Avatar, Tooltip, Progress, ButtonIcon, Icon } from '@poliedro/tamentai/web';
 import { useGlobalToast } from './contexts/ToastContext';
-import { Trash } from 'lucide-react';
 
 interface Pokemon {
   id: number;
@@ -135,7 +134,7 @@ export default function PokemonPlayground() {
                         Detalhes
                       </Button>
                       <ButtonIcon aria-label="Soltar" variant="ghost" color="destructive" size="sm" onClick={() => handleRelease(formattedName)}>
-                        <Trash size={16} aria-hidden="true" />
+                        <Icon name='Trash' size={16} aria-hidden="true" />
                       </ButtonIcon>
                     </div>
                   </div>
