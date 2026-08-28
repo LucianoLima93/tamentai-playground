@@ -13,7 +13,7 @@ export function HeroSection() {
   return (
     <section className={styles.hero}>
       <div className={styles.badge}>
-        <span className={styles.badgeDot} />{'  '}v1.0.0-beta.11
+        <span className={styles.badgeDot} />{'  '}v1.0.2
       </div>
 
       <h1 className={styles.title}>
