@@ -1,0 +1,12 @@
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+# Fallback SPA: serve o index.html para qualquer rota que não seja um
+# arquivo estático, deixando o TanStack Router resolver no client.
+# Necessário para que links diretos e refresh (ex.: /components/avatar)
+# funcionem em produção.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
