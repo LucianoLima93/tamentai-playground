@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { Badge, Spinner } from '@poliedro/tamentai/web'
 import { useCategories } from '../../hooks/useDummyJson'
+import styles from './CategoryFilter.module.css'
 
 interface CategoryFilterProps {
   selected: string | null;
@@ -34,15 +35,7 @@ export function CategoryFilter({ selected, onSelect }: Readonly<CategoryFilterPr
 
   return (
     <fieldset
-      style={{
-        display: 'flex',
-        gap: '0.5rem',
-        overflowX: 'auto',
-        padding: '0.5rem 0',
-        scrollbarWidth: 'thin',
-        border: 'none',
-        margin: 0,
-      }}
+      className={styles.filterContainer}
       aria-label="Filtrar por categoria"
     >
       {/* Custom: Tamentai Badge is non-interactive; unstyled button provides a11y click target */}
@@ -50,7 +43,7 @@ export function CategoryFilter({ selected, onSelect }: Readonly<CategoryFilterPr
         type="button"
         ref={selected === null ? activeRef : undefined}
         onClick={() => onSelect(null)}
-        style={{ all: 'unset', cursor: 'pointer', display: 'inline-flex' }}
+        className={styles.chipButton}
       >
         <Badge
           variant={selected === null ? 'solid' : 'soft'}
@@ -67,7 +60,7 @@ export function CategoryFilter({ selected, onSelect }: Readonly<CategoryFilterPr
           key={cat.slug}
           ref={selected === cat.slug ? activeRef : undefined}
           onClick={() => onSelect(cat.slug)}
-          style={{ all: 'unset', cursor: 'pointer', display: 'inline-flex', whiteSpace: 'nowrap' }}
+          className={styles.chipButton}
         >
           <Badge
             variant={selected === cat.slug ? 'solid' : 'soft'}

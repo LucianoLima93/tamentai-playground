@@ -36,6 +36,13 @@ export function Header() {
           Shop
         </Link>
         <Link
+          to="/components"
+          className={styles.navLink}
+          activeProps={{ className: `${styles.navLink} ${styles.navLinkActive}` }}
+        >
+          Components
+        </Link>
+        <Link
           to="/table"
           style={{ display: 'none' }}
           className={styles.navLink}

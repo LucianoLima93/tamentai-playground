@@ -7,6 +7,7 @@ import { CategoryFilter } from '../../components/Shop/CategoryFilter'
 import { SearchBar } from '../../components/Shop/SearchBar'
 import { useWishlist } from '../../contexts/WishlistContext'
 import type { Product } from '../../types/product'
+import styles from './Shop.module.css'
 
 interface ShopSearch {
   favorites?: boolean;
@@ -134,26 +135,26 @@ function ShopIndexPage() {
   }
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1280px', margin: '0 auto', width: '100%' }}>
+    <div className={styles.container}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+      <div className={styles.headerRow}>
         <TitleV2 variant="h2" weight="bold">Shop</TitleV2>
-        <div style={{ width: '280px' }}>
+        <div className={styles.searchWrapper}>
           <SearchBar />
         </div>
       </div>
 
       {/* Filters row */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div style={{ overflowX: 'auto' }}>
+      <div className={styles.filtersRow}>
+        <div className={styles.categoryWrapper}>
           <CategoryFilter selected={category} onSelect={handleCategoryChange} />
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'flex-end' }}>
-          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: 'var(--color-muted, #666)', whiteSpace: 'nowrap' }}>
+        <div className={styles.controlsRow}>
+          <label className={styles.favoritesLabel}>
             <Switch checked={showFavoritesOnly} onCheckedChange={setShowFavoritesOnly} />
             Favoritos
           </label>
-          <div style={{ width: '180px' }}>
+          <div className={styles.sortWrapper}>
             <Select
               label=""
               placeholder="Ordenar por"

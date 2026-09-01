@@ -1,6 +1,7 @@
 import { ButtonIcon, Icon, Text, Tooltip } from '@poliedro/tamentai/web'
 import type { CartItem as CartItemType } from '../../types/product'
 import { useCart } from '../../contexts/CartContext'
+import styles from './CartItem.module.css'
 
 interface CartItemProps {
   item: CartItemType;
@@ -13,29 +14,16 @@ export function CartItem({ item }: Readonly<CartItemProps>) {
   const subtotal = discountedPrice * quantity
 
   return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '1rem',
-      padding: '1rem',
-      borderBottom: '1px solid var(--color-border, #e5e5e5)',
-    }}>
+    <div className={styles.item}>
       {/* Thumbnail */}
       <img
         src={product.thumbnail}
         alt={product.title}
-        style={{
-          width: '64px',
-          height: '64px',
-          objectFit: 'cover',
-          borderRadius: '6px',
-          flexShrink: 0,
-          background: 'var(--color-muted-bg, #f5f5f5)',
-        }}
+        className={styles.thumbnail}
       />
 
       {/* Info */}
-      <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+      <div className={styles.info}>
         <Text weight="semibold" as="p">{product.title}</Text>
         <Text variant="caption" color="muted" as="p">
           {product.brand} · ${discountedPrice.toFixed(2)} un.
@@ -43,7 +31,7 @@ export function CartItem({ item }: Readonly<CartItemProps>) {
       </div>
 
       {/* Quantity controls */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', flexShrink: 0 }}>
+      <div className={styles.controls}>
         <ButtonIcon
           aria-label="Diminuir quantidade"
           variant="outline"
@@ -64,11 +52,13 @@ export function CartItem({ item }: Readonly<CartItemProps>) {
       </div>
 
       {/* Subtotal */}
-      <Text weight="bold" as="span">${subtotal.toFixed(2)}</Text>
+      <div className={styles.subtotal}>
+        <Text weight="bold" as="span">${subtotal.toFixed(2)}</Text>
+      </div>
 
       {/* Remove */}
       <Tooltip content="Remover do carrinho">
-        <span style={{ display: 'inline-flex' }}>
+        <span className={styles.removeWrapper}>
           <ButtonIcon
             aria-label="Remover item"
             variant="ghost"

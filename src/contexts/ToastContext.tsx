@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback, useMemo, type ReactNode } from 'react';
 import { Toast } from '@poliedro/tamentai/web';
+import styles from './ToastContext.module.css';
 
 export type ToastType = 'info' | 'success' | 'warning' | 'error';
 
@@ -61,15 +62,13 @@ export function ToastProvider({ children }: Readonly<{ children: ReactNode }>) {
         return (
           <div
             key={toast.id}
+            className={styles.toastItem}
             style={{
-              position: 'fixed',
-              bottom: `${1 + stackIndex * 0.5}rem`,
-              right: '1rem',
               zIndex: 9999 - stackIndex,
-              transform: `scale(${1 - stackIndex * 0.03})`,
               opacity: stackIndex > 3 ? 0 : 1,
-              transition: 'transform 0.2s ease, bottom 0.2s ease, opacity 0.2s ease',
+              transform: `scale(${1 - stackIndex * 0.03})`,
               pointerEvents: stackIndex === 0 ? 'auto' : 'none',
+              ['--stack-index' as string]: stackIndex,
             }}
           >
             <Toast

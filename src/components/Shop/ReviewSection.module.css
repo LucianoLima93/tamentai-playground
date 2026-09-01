@@ -1,0 +1,73 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.overview {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ratingSummary {
+  text-align: center;
+  min-width: 120px;
+}
+
+.starGroup {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.distribution {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.distributionRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progressBarWrapper {
+  flex: 1;
+}
+
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .section {
+    margin-top: 2rem;
+    gap: 1.5rem;
+  }
+
+  .overview {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+
+  .distribution {
+    min-width: 100%;
+  }
+}

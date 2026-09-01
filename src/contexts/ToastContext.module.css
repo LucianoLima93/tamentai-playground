@@ -1,0 +1,22 @@
+.toastItem {
+  position: fixed;
+  right: 1.5rem;
+  bottom: calc(1.5rem + (var(--stack-index, 0) * 0.5rem));
+  z-index: 9999;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), bottom 0.25s ease, top 0.25s ease, opacity 0.25s ease;
+  max-width: calc(100vw - 2rem);
+}
+
+@media (max-width: 768px) {
+  .toastItem {
+    right: auto;
+    bottom: auto;
+    top: calc(1rem + (var(--stack-index, 0) * 0.5rem));
+    left: 50%;
+    transform: translateX(-50%) scale(calc(1 - (var(--stack-index, 0) * 0.03))) !important;
+    width: calc(100vw - 2rem);
+    max-width: 420px;
+    display: flex;
+    justify-content: center;
+  }
+}

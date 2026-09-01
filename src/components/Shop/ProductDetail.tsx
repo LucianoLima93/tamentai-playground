@@ -99,7 +99,7 @@ export function ProductDetail({ product }: Readonly<ProductDetailProps>) {
 
         <div className={styles.ratingRow}>
           {Array.from({ length: 5 }).map((_, i) => (
-            <Icon name='Star' size={16} fill={i < Math.round(product.rating) ? '#f59e0b' : 'transparent'} stroke='#f59e0b' className={styles.starIcon} />
+            <Icon key={i} name='Star' size={16} fill={i < Math.round(product.rating) ? '#f59e0b' : 'transparent'} stroke='#f59e0b' className={styles.starIcon} />
           ))}
           <Text variant="body-sm" color="muted">
             {product.rating.toFixed(1)} ({product.reviews.length} reviews)

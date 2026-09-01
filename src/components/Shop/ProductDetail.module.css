@@ -97,6 +97,18 @@
 @media (max-width: 768px) {
   .container {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 }
+
+@media (max-width: 480px) {
+  .thumb {
+    width: 52px;
+    height: 52px;
+  }
+
+  .priceBlock {
+    flex-wrap: wrap;
+  }
+}
+

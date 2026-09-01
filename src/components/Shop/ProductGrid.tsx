@@ -1,4 +1,4 @@
-import { Spinner, Button } from '@poliedro/tamentai/web'
+import { Button, Spinner, Text } from '@poliedro/tamentai/web'
 import type { Product } from '../../types/product'
 import { ProductCard } from './ProductCard'
 import styles from './ProductGrid.module.css'
@@ -26,7 +26,7 @@ export function ProductGrid({ products, loading, hasMore, onLoadMore, loadingMor
     return (
       <div className={styles.emptyState}>
         <span className={styles.emptyIcon}>{emptyIcon ?? '🔍'}</span>
-        <span className={styles.emptyText}>{emptyMessage ?? 'Nenhum produto encontrado'}</span>
+        <Text color="muted">{emptyMessage ?? 'Nenhum produto encontrado'}</Text>
       </div>
     )
   }

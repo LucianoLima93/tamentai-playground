@@ -1,5 +1,6 @@
 import { Avatar, Badge, Card, Icon, Progress, Text, TitleV2 } from '@poliedro/tamentai/web'
 import type { ProductReview } from '../../types/product'
+import styles from './ReviewSection.module.css'
 
 interface ReviewSectionProps {
   reviews: ProductReview[];
@@ -35,18 +36,18 @@ export function ReviewSection({ reviews, averageRating }: Readonly<ReviewSection
   const maxCount = Math.max(...distribution, 1)
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginTop: '3rem' }}>
+    <div className={styles.section}>
       <TitleV2 variant="h4" weight="bold">
         Avaliações ({reviews.length})
       </TitleV2>
 
       {/* Rating Overview */}
-      <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', flexWrap: 'wrap' }}>
-        <div style={{ textAlign: 'center' }}>
+      <div className={styles.overview}>
+        <div className={styles.ratingSummary}>
           <TitleV2 variant="h1" weight="bold">{averageRating.toFixed(1)}</TitleV2>
-          <div style={{ display: 'flex', gap: '2px', justifyContent: 'center', marginTop: '0.5rem' }}>
+          <div className={styles.starGroup}>
             {Array.from({ length: 5 }).map((_, i) => (
-              <Icon name='Star' size={16} fill={i < Math.round(averageRating) ? '#f59e0b' : 'transparent'} stroke="#f59e0b" />
+              <Icon key={i} name='Star' size={16} fill={i < Math.round(averageRating) ? '#f59e0b' : 'transparent'} stroke="#f59e0b" />
             ))}
           </div>
           <Text variant="caption" color="muted">
@@ -54,11 +55,11 @@ export function ReviewSection({ reviews, averageRating }: Readonly<ReviewSection
           </Text>
         </div>
 
-        <div style={{ flex: 1, minWidth: '200px', display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+        <div className={styles.distribution}>
           {[5, 4, 3, 2, 1].map((star, i) => (
-            <div key={star} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div key={star} className={styles.distributionRow}>
               <Text variant="caption" color="muted" as="span">{star}★</Text>
-              <div style={{ flex: 1 }}>
+              <div className={styles.progressBarWrapper}>
                 <Progress value={(distribution[i] / maxCount) * 100} variant="linear" size="sm" />
               </div>
               <Text variant="caption" color="muted" as="span">{distribution[i]}</Text>
@@ -68,7 +69,7 @@ export function ReviewSection({ reviews, averageRating }: Readonly<ReviewSection
       </div>
 
       {/* Review List */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div className={styles.reviewList}>
         {reviews.map((review) => (
           <Card key={`${review.reviewerEmail}-${review.date}`}>
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
@@ -78,8 +79,8 @@ export function ReviewSection({ reviews, averageRating }: Readonly<ReviewSection
                 shape="circular"
                 initials={getInitials(review.reviewerName)}
               />
-              <div style={{ flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div className={styles.reviewHeader}>
                   <Text weight="semibold">{review.reviewerName}</Text>
                   <Badge color={getReviewBadgeColor(review.rating)} size="sm" shape="pilled">
                     {review.rating}/5

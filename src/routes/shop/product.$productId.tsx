@@ -1,8 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Spinner } from '@poliedro/tamentai/web'
+import { Spinner, Text } from '@poliedro/tamentai/web'
 import { useProduct } from '../../hooks/useDummyJson'
 import { ProductDetail } from '../../components/Shop/ProductDetail'
 import { ReviewSection } from '../../components/Shop/ReviewSection'
+import styles from './ProductPage.module.css'
 
 export const Route = createFileRoute('/shop/product/$productId')({
   component: ProductDetailPage,
@@ -14,7 +15,7 @@ function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
+      <div className={styles.centerState}>
         <Spinner />
       </div>
     )
@@ -22,14 +23,14 @@ function ProductDetailPage() {
 
   if (error || !product) {
     return (
-      <div style={{ padding: '2rem', textAlign: 'center' }}>
-        <p>Produto não encontrado.</p>
+      <div className={styles.centerState}>
+        <Text color="muted">Produto não encontrado.</Text>
       </div>
     )
   }
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1120px', margin: '0 auto', width: '100%' }}>
+    <div className={styles.container}>
       <ProductDetail product={product} />
       {product.reviews.length > 0 && (
         <ReviewSection reviews={product.reviews} averageRating={product.rating} />
