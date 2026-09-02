@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComponentsRouteImport } from './routes/components'
+import { Route as SelectComboboxRouteImport } from './routes/select-combobox'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as TableRouteImport } from './routes/table'
 import { Route as ComponentsIndexRouteImport } from './routes/components/index'
@@ -27,6 +28,11 @@ const IndexRoute = IndexRouteImport.update({
 const ComponentsRoute = ComponentsRouteImport.update({
   id: '/components',
   path: '/components',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SelectComboboxRoute = SelectComboboxRouteImport.update({
+  id: '/select-combobox',
+  path: '/select-combobox',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -68,6 +74,7 @@ const ShopProductProductIdRoute = ShopProductProductIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/components': typeof ComponentsRouteWithChildren
+  '/select-combobox': typeof SelectComboboxRoute
   '/shop': typeof ShopRouteWithChildren
   '/table': typeof TableRoute
   '/components/$componentId': typeof ComponentsComponentIdRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/select-combobox': typeof SelectComboboxRoute
   '/table': typeof TableRoute
   '/components/$componentId': typeof ComponentsComponentIdRoute
   '/shop/cart': typeof ShopCartRoute
@@ -89,6 +97,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/components': typeof ComponentsRouteWithChildren
+  '/select-combobox': typeof SelectComboboxRoute
   '/shop': typeof ShopRouteWithChildren
   '/table': typeof TableRoute
   '/components/$componentId': typeof ComponentsComponentIdRoute
@@ -102,6 +111,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/components'
+    | '/select-combobox'
     | '/shop'
     | '/table'
     | '/components/$componentId'
@@ -112,6 +122,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/select-combobox'
     | '/table'
     | '/components/$componentId'
     | '/shop/cart'
@@ -122,6 +133,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/components'
+    | '/select-combobox'
     | '/shop'
     | '/table'
     | '/components/$componentId'
@@ -134,6 +146,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComponentsRoute: typeof ComponentsRouteWithChildren
+  SelectComboboxRoute: typeof SelectComboboxRoute
   ShopRoute: typeof ShopRouteWithChildren
   TableRoute: typeof TableRoute
 }
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       path: '/components'
       fullPath: '/components'
       preLoaderRoute: typeof ComponentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/select-combobox': {
+      id: '/select-combobox'
+      path: '/select-combobox'
+      fullPath: '/select-combobox'
+      preLoaderRoute: typeof SelectComboboxRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -237,6 +257,7 @@ const ShopRouteWithChildren = ShopRoute._addFileChildren(ShopRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComponentsRoute: ComponentsRouteWithChildren,
+  SelectComboboxRoute: SelectComboboxRoute,
   ShopRoute: ShopRouteWithChildren,
   TableRoute: TableRoute,
 }

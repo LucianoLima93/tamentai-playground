@@ -43,6 +43,13 @@ export function Header() {
           Components
         </Link>
         <Link
+          to="/select-combobox"
+          className={styles.navLink}
+          activeProps={{ className: `${styles.navLink} ${styles.navLinkActive}` }}
+        >
+          Select &amp; Combobox
+        </Link>
+        <Link
           to="/table"
           style={{ display: 'none' }}
           className={styles.navLink}
