@@ -1,55 +1,59 @@
-import { Button, useToast } from '@poliedro/tamentai/web'
+import { Button, Text } from '@poliedro/tamentai/web'
+import { useGlobalToast } from '../../../contexts/ToastContext'
+import type { ToastType } from '../../../contexts/ToastContext'
 import { ShowcaseSection } from '../ShowcaseSection'
 
-const VARIANTS = ['success', 'warning', 'info', 'error', 'neutral'] as const
-const APPEARANCES = ['solid', 'soft', 'white'] as const
+const TYPES: ToastType[] = ['info', 'success', 'warning', 'error']
 
 export function ToastShowcase() {
-  const { addToast } = useToast()
+  const { showToast } = useGlobalToast()
 
   return (
     <>
       <ShowcaseSection
-        title="Variants"
-        description="Clique para disparar um toast de cada status."
+        title="Types"
+        description="Clique para disparar um toast de cada status. Usa o ToastProvider da aplicação (useGlobalToast)."
         layout="row"
       >
-        {VARIANTS.map((variant) => (
+        {TYPES.map((type) => (
           <Button
-            key={variant}
+            key={type}
             variant="outline"
             onClick={() =>
-              addToast({
-                variant,
-                appearance: 'soft',
-                title: `Toast ${variant}`,
-                description: 'Notificação de exemplo disparada via useToast.',
+              showToast({
+                type,
+                title: `Toast ${type}`,
+                description: 'Notificação de exemplo disparada pela galeria.',
               })
             }
           >
-            {variant}
+            {type}
           </Button>
         ))}
       </ShowcaseSection>
 
-      <ShowcaseSection title="Appearances" layout="row">
-        {APPEARANCES.map((appearance) => (
-          <Button
-            key={appearance}
-            variant="outline"
-            onClick={() =>
-              addToast({
-                variant: 'info',
-                appearance,
-                title: `Appearance ${appearance}`,
-                description: 'Exemplo de aparência do toast.',
-              })
-            }
-          >
-            {appearance}
-          </Button>
-        ))}
+      <ShowcaseSection title="Com ação" layout="row">
+        <Button
+          variant="outline"
+          onClick={() =>
+            showToast({
+              type: 'info',
+              title: 'Item arquivado',
+              description: 'Você pode desfazer esta ação.',
+              action: 'Desfazer',
+              onAction: () => showToast({ type: 'success', description: 'Ação desfeita.' }),
+            })
+          }
+        >
+          Toast com ação
+        </Button>
       </ShowcaseSection>
+
+      <Text as="p" variant="body-sm" color="muted">
+        Observação: este playground usa o ToastProvider próprio da aplicação
+        (src/contexts/ToastContext). O hook useToast do Tamentai exige o
+        Toast.Provider do Base UI, que não está montado aqui.
+      </Text>
     </>
   )
 }
